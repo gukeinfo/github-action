@@ -13,4 +13,3 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "每当 PR 被创建或同步更新，且目标分支为 main 时运行"
-      - run: echo "PR 创建或同步时，PR 的标题为 ${{ github.event.pull_request.title }}"
