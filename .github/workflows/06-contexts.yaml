@@ -1,0 +1,22 @@
+name: 06 - Contexts
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  echo-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display Information
+        run: |
+          echo "事件名称: ${{ github.event_name }}"
+          echo "分支或标签引用: ${{ github.ref }}"
+          echo "提交哈希: ${{ github.sha }}"
+          echo "触发用户: ${{ github.actor }}"
+          echo "工作流名称: ${{ github.workflow }}"
+          echo "运行 ID: ${{ github.run_id }}"
+          echo "运行序号: ${{ github.run_number }}"
+      - name: Retrieve Variable
+        run: |
+          echo "变量值: ${{ vars.MY_VAR }}"
