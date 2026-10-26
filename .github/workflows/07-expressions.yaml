@@ -1,0 +1,26 @@
+name: 07 - Using Expressions
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      debug:
+        type: boolean
+        default: false
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "[debug] print start-up data"
+        if: ${{ inputs.debug }}
+        run: |
+          echo "触发事件：${{ github.event_name }}"
+          echo "分支：${{ github.ref }}"
+          echo "提交 SHA：${{ github.sha }}"
+          echo "运行器操作系统：${{ runner.os }}"
+      - name: "[debug] print when triggered from main"
+        if: ${{ inputs.debug && github.ref == 'refs/heads/main' }}
+        run: echo "我是从 main 分支触发的"
+      - name: "Greeting"
+        run: echo "Hello, world"
