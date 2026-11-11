@@ -1,0 +1,24 @@
+name: 09 - Using Functions
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  echo1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Failing step
+        run: exit 1
+      - name: I will be skipped
+        if: ${{ success() }}
+        run: echo "如果前面的步骤都成功，我就会打印这条消息。"
+      - name: I will execute
+        if: ${{ failure() }}
+        run: echo "如果前面有任何一步失败，我就会打印这条消息。"
+      - name: I will execute
+        if: ${{ !cancelled() }}
+        run: echo "只要工作流没有被取消，我就会打印这条消息。"
+      - name: I will execute when cancelled
+        if: ${{ cancelled() }}
+        run: echo "如果工作流已被取消，我就会打印这条消息。"
